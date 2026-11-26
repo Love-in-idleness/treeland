@@ -35,6 +35,11 @@
         <translation>更改大小</translation>
     </message>
     <message>
+        <location filename="../src/core/qml/WindowMenu.qml" line="64"/>
+        <source>Magnify Window</source>
+        <translation>放大視窗</translation>
+    </message>
+    <message>
         <location filename="../src/core/qml/WindowMenu.qml" line="50"/>
         <source>Always on Top</source>
         <translation>總在最前</translation>

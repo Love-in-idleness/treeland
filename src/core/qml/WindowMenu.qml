@@ -10,6 +10,7 @@ Menu {
     modal: true
 
     property SurfaceWrapper surface: null
+    property SurfaceWrapper windowToMagnify: null
     readonly property bool canToggleMaximize: surface
         ? surface.surfaceState === SurfaceWrapper.State.Maximized || surface.isMaximizable
         : false
@@ -20,7 +21,16 @@ Menu {
     }
 
     onClosed: {
-        surface = null
+        // A menu item can emit triggered during close when transitions are disabled.
+        Qt.callLater(() => {
+            const target = windowToMagnify
+            windowToMagnify = null
+            if (!menu.visible) {
+                surface = null
+                if (target)
+                    WaylandServer.magnifyWindow(target)
+            }
+        })
     }
 
     function showWindowMenu(surface, pos) {
@@ -48,6 +58,12 @@ Menu {
     MenuItem {
         text: qsTr("Resize")
         onTriggered: WaylandServer.fakePressSurfaceBottomRightToReszie(surface)
+    }
+
+    MenuItem {
+        text: qsTr("Magnify Window")
+        enabled: WaylandServer.canMagnifyWindow(menu.surface)
+        onTriggered: menu.windowToMagnify = menu.surface
     }
 
     MenuItem {
