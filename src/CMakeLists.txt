@@ -177,6 +177,8 @@ qt_add_qml_module(libtreeland
         core/treeland.h
         core/windowconfigstore.cpp
         core/windowconfigstore.h
+        core/windowmagnifier.cpp
+        core/windowmagnifier.h
         $<$<OR:$<NOT:$<BOOL:${DISABLE_DDM}>>,$<BOOL:${EXT_SESSION_LOCK_V1}>>:lockscreen/lockscreen.h>
         $<$<OR:$<NOT:$<BOOL:${DISABLE_DDM}>>,$<BOOL:${EXT_SESSION_LOCK_V1}>>:lockscreen/lockscreen.cpp>
         $<$<NOT:$<BOOL:${DISABLE_DDM}>>:greeter/greeterproxy.cpp>
@@ -326,6 +328,7 @@ qt_add_qml_module(libtreeland
         core/qml/Decoration.qml
         core/qml/FrameClip.qml
         core/qml/WindowMenu.qml
+        core/qml/WindowMagnifier.qml
         core/qml/TaskBar.qml
         core/qml/SurfaceContent.qml
         core/qml/XdgShadow.qml

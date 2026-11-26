@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0 OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
 
 #include "waylandserver.h"
+#include "windowmagnifier.h"
 #include "session/sessionmanager.h"
 #include "session/sessionmultitaskview.h"
 #include "lockscreen/lockscreenmanager.h"
@@ -720,6 +721,18 @@ void WaylandServer::init(Treeland::Treeland *treeland)
     // initialization and fallen back to defaults.
     startBackend();
     m_outputManager->backendStarted();
+    m_windowMagnifier = new WindowMagnifier(this);
+}
+
+bool WaylandServer::canMagnifyWindow(SurfaceWrapper *surface) const
+{
+    return m_windowMagnifier && m_windowMagnifier->canMagnify(surface);
+}
+
+void WaylandServer::magnifyWindow(SurfaceWrapper *surface)
+{
+    if (m_windowMagnifier)
+        m_windowMagnifier->start(surface);
 }
 
 SeatManager *WaylandServer::seatManager() const

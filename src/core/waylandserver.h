@@ -149,6 +149,7 @@ class KeyboardShortcutsInhibitManagerV1;
 class TreelandWallpaperSurfaceInterfaceV1;
 class WallpaperManager;
 class WallpaperItem;
+class WindowMagnifier;
 class TreelandInputManagerInterfaceV1;
 class InputManager;
 
@@ -220,6 +221,8 @@ public:
     WOutputRenderWindow *window() const;
     GraphicsPlatform *graphicsPlatform() const;
     ShellHandler *shellHandler() const;
+    Q_INVOKABLE bool canMagnifyWindow(SurfaceWrapper *surface) const;
+    Q_INVOKABLE void magnifyWindow(SurfaceWrapper *surface);
     Session *activeSession() const;
     DesktopEnvironment *desktop() const;
     QList<DesktopEnvironment *> desktopEnvironments() const;
@@ -465,6 +468,7 @@ private:
     // Seat and desktop protocol adapters
     WSeat *m_primarySeat = nullptr;
     ShellHandler *m_shellHandler = nullptr;
+    WindowMagnifier *m_windowMagnifier = nullptr;
     WPointerConstraintsV1 *m_pointerConstraintsV1 = nullptr;
     PointerConstraintsManager *m_pointerConstraintsManager = nullptr;
     CompositorActionInterfaceV1 *m_compositorActionInterfaceV1 = nullptr;
